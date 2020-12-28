@@ -29,6 +29,7 @@ github:https://github.com/lewisxhe/Air530_Library
 /////////////////////////////////////////////////////////////////
 
 
+
 #include "Air530.h"
 
 #define _LOOP_TO_TIMEOUT(func)      do{                             \
@@ -112,10 +113,9 @@ void Air530::stop(void)
 void Air530::wakeup(void)
 {
     if (wakeup_pin > 0) {
-        pinMode(wakeup_pin, OUTPUT);
-        digitalWrite(wakeup_pin, LOW); delay(60);
-        digitalWrite(wakeup_pin, HIGH); delay(200);
-        digitalWrite(wakeup_pin, LOW);
+        digitalWrite(wakeup_pin, HIGH); delay(60);
+        digitalWrite(wakeup_pin, LOW); delay(200);
+        digitalWrite(wakeup_pin, HIGH);
     }
 }
 
@@ -281,6 +281,7 @@ bool Air530::setPPS(Air530_1PPS_Mode mode, uint16_t ppsWidth, uint16_t ppsPeriod
         return false;
     }
     sendCmd("$PGKC161,%u,%u,%u", mode, ppsWidth, ppsPeriod);
+    return true;
 }
 
 /**
@@ -508,7 +509,7 @@ bool Air530::process(/*Stream *serial = nullptr*/void)
     }
 
     if (charsProcessed() < 10) {
-        Serial.println(F("WARNING: No GPS data.  Check wiring."));
+        // Serial.println(F("WARNING: No GPS data.  Check wiring."));
         return false;
     }
     return true;
