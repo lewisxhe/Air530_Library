@@ -29,8 +29,6 @@ github:https://github.com/lewisxhe/Air530_Library
 /////////////////////////////////////////////////////////////////
 
 
-#pragma once
-
 #include "Air530.h"
 
 #define _LOOP_TO_TIMEOUT(func)      do{                             \
